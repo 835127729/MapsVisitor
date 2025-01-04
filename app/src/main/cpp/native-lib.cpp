@@ -74,5 +74,6 @@ Java_com_muye_mapsvisitor_MainActivity_testMapVisitor(
     if(!maps_visitor_reset(mapVisitor)){
         return JNI_FALSE;
     }
+    LOGD(TAG, "测试成功");
     return JNI_TRUE;
 }

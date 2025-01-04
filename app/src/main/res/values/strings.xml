@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MapsVisitor</string>
-    <string name="test_maps_visitor">测试MapsVisitor</string>
+    <string name="test_maps_visitor">测试MapsVisitor,输出到Logcat</string>
 </resources>
