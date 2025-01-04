@@ -9,7 +9,7 @@
 #include <string.h>
 #include "include/maps_visitor.h"
 
-struct MapVisitor {
+struct MapsVisitor {
     //进程id
     pid_t pid;
     //maps文件
@@ -18,8 +18,8 @@ struct MapVisitor {
     char buffer[1024];
 };
 
-MapVisitor_t *map_visitor_create(pid_t pid) {
-    MapVisitor_t *visitor = (MapVisitor_t *) calloc(1, sizeof(MapVisitor_t));
+MapsVisitor_t *maps_visitor_create(pid_t pid) {
+    MapsVisitor_t *visitor = (MapsVisitor_t *) calloc(1, sizeof(MapsVisitor_t));
     if (visitor == NULL) {
         return NULL;
     }
@@ -42,7 +42,7 @@ MapVisitor_t *map_visitor_create(pid_t pid) {
     return visitor;
 }
 
-int map_visitor_destroy(MapVisitor_t *visitor) {
+int maps_visitor_destroy(MapsVisitor_t *visitor) {
     if (visitor == NULL) {
         return 0;
     }
@@ -57,28 +57,28 @@ int map_visitor_destroy(MapVisitor_t *visitor) {
     return -1;
 }
 
-bool map_visitor_valid(MapVisitor_t *visitor) {
+bool maps_visitor_valid(MapsVisitor_t *visitor) {
     return visitor != NULL && visitor->fd != NULL;
 }
 
-bool map_visitor_reset(MapVisitor_t *visitor) {
-    if (!map_visitor_valid(visitor)) {
+bool maps_visitor_reset(MapsVisitor_t *visitor) {
+    if (!maps_visitor_valid(visitor)) {
         return false;
     }
     rewind(visitor->fd);
     return true;
 }
 
-bool map_visitor_has_next(MapVisitor_t *visitor) {
-    if (!map_visitor_valid(visitor)) {
+bool maps_visitor_has_next(MapsVisitor_t *visitor) {
+    if (!maps_visitor_valid(visitor)) {
         return false;
     }
     //读取下一行
     return fgets(visitor->buffer, sizeof(visitor->buffer), visitor->fd) != NULL;
 }
 
-MapItem* map_visitor_next(MapVisitor_t *visitor, MapItem *mapItem) {
-    if (!map_visitor_valid(visitor)) {
+MapItem* maps_visitor_next(MapsVisitor_t *visitor, MapItem *mapItem) {
+    if (!maps_visitor_valid(visitor)) {
         return NULL;
     }
     int pathPosition;

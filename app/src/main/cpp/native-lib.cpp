@@ -16,19 +16,19 @@ extern "C" JNIEXPORT jboolean JNICALL
 Java_com_muye_mapsvisitor_MainActivity_testMapVisitor(
         JNIEnv* env,
         jobject /* this */) {
-    MapVisitor_t* mapVisitor = map_visitor_create(0);
+    MapsVisitor_t* mapVisitor = maps_visitor_create(0);
     std::ifstream file("/proc/self/maps");
 
-    if (map_visitor_valid(mapVisitor) != file.is_open()) {
-        map_visitor_destroy(mapVisitor);
+    if (maps_visitor_valid(mapVisitor) != file.is_open()) {
+        maps_visitor_destroy(mapVisitor);
         return JNI_FALSE;
     }
 
     std::stringstream ss;
     std::string line;
     MapItem mapItem{0};
-    while(map_visitor_has_next(mapVisitor)) {
-        MapItem* item = map_visitor_next(mapVisitor, &mapItem);
+    while(maps_visitor_has_next(mapVisitor)) {
+        MapItem* item = maps_visitor_next(mapVisitor, &mapItem);
         getline(file, line);
         if(item == nullptr) {
             return JNI_FALSE;
@@ -65,13 +65,13 @@ Java_com_muye_mapsvisitor_MainActivity_testMapVisitor(
             LOGE(TAG, "不相同:");
             LOGI(TAG, "%s", line.c_str());
             LOGE(TAG, "%s", ss.str().c_str());
-            map_visitor_destroy(mapVisitor);
+            maps_visitor_destroy(mapVisitor);
             return JNI_FALSE;
         }
         //810d9000-81250000 r-xp 00000000 00:04 51499      /dev/ashmem/dalvik-jit-code-cache (deleted)
     }
 
-    if(!map_visitor_reset(mapVisitor)){
+    if(!maps_visitor_reset(mapVisitor)){
         return JNI_FALSE;
     }
     return JNI_TRUE;

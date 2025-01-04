@@ -22,18 +22,18 @@ typedef struct MapItem {
 } MapItem;
 
 //前置声明，用于隐藏结构体细节
-typedef struct MapVisitor MapVisitor_t;
+typedef struct MapsVisitor MapsVisitor_t;
 
-MapVisitor_t *map_visitor_create(pid_t pid);
+MapsVisitor_t *maps_visitor_create(pid_t pid);
 
-bool map_visitor_valid(MapVisitor_t *visitor);
+bool maps_visitor_valid(MapsVisitor_t *visitor);
 
-bool map_visitor_reset(MapVisitor_t *visitor);
+bool maps_visitor_reset(MapsVisitor_t *visitor);
 
-bool map_visitor_has_next(MapVisitor_t *visitor);
+bool maps_visitor_has_next(MapsVisitor_t *visitor);
 
-MapItem* map_visitor_next(MapVisitor_t *visitor, MapItem *mapItem);
+MapItem* maps_visitor_next(MapsVisitor_t *visitor, MapItem *mapItem);
 
-int map_visitor_destroy(MapVisitor_t *visitor);
+int maps_visitor_destroy(MapsVisitor_t *visitor);
 
 __END_DECLS
