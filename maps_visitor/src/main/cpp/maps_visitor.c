@@ -86,6 +86,7 @@ MapItem* maps_visitor_next(MapsVisitor_t *visitor, MapItem *mapItem) {
            "%" PRIxPTR"-%" PRIxPTR" %4s %" PRIxPTR" %" PRIxPTR":%" PRIxPTR" %" PRIuMAX" %n",
            &mapItem->start_address, &mapItem->end_address, mapItem->permission, &mapItem->offset,
            &mapItem->major_dev, &mapItem->minor_dev, &mapItem->inode, &pathPosition);
+    //截取pathname
     char *path = visitor->buffer + pathPosition;
     size_t len = strlen(path);
     if (len && path[len - 1] == '\n') {
