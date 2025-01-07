@@ -24,7 +24,7 @@
 
 ### 1、在 build.gradle.kts 中增加依赖
 
-```kotlin
+```Kotlin
 android{
 	buildFeatures {        
     //1、声明可以进行原生依赖，具体参考https://developer.android.com/build/native-dependencies
@@ -42,7 +42,7 @@ dependencies {
 
 ### 2、在 CMakeLists.txt增加依赖
 
-```makefile
+```Makefile
 ...
 find_package(maps_visitor REQUIRED CONFIG)
   
@@ -59,7 +59,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
 如果你是在一个 SDK 工程里使用 MapsVisitor，你可能需要避免把`libmaps_visitor.so` 打包到你的 AAR 里，以免 app 工程打包时遇到重复的 `libmaps_visitor.so` 文件。
 
-```kotlin
+```Kotlin
 android {
     packagingOptions {
         excludes += listOf(
@@ -71,7 +71,7 @@ android {
 
 另一方面, 如果你是在一个 APP 工程里使用 MapsVisitor，你可以需要增加一些选项，用来处理重复的 `libmaps_visitor.so` 文件引起的冲突。
 
-```kotlin
+```Kotlin
 android {
     packagingOptions {
         pickFirsts += listOf(
@@ -85,7 +85,7 @@ android {
 
 ### 4、使用
 
-```c
+```C
 //1、传入pid打开对应的proc/pid/maps文件，传入0默认为当前进程
 MapsVisitor_t *visitor = maps_visitor_create(0);
 //2、申请内存，用于存储每行解析后的数据
@@ -103,7 +103,7 @@ maps_visitor_destroy(visitor);
 
 其中`MapItem`的结构为：
 
-```c
+```C
 typedef struct MapItem {
     uintptr_t start_address;
     uintptr_t end_address;
@@ -118,7 +118,7 @@ typedef struct MapItem {
 
 另外有两个常用方法：
 
-```c++
+```C++
 //判断proc/pid/maps文件是否打开成功
 bool maps_visitor_valid(MapsVisitor_t *visitor);
 
@@ -130,6 +130,6 @@ bool maps_visitor_reset(MapsVisitor_t *visitor);
 
 
 
-## 许可证
+## 四、许可证
 
 MapsVisitor 使用 [MIT 许可证](https://github.com/bytedance/bhook/blob/main/LICENSE) 授权。
