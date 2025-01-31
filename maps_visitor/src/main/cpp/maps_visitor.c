@@ -81,6 +81,7 @@ MapItem* maps_visitor_next(MapsVisitor_t *visitor, MapItem *mapItem) {
     if (!maps_visitor_valid(visitor)) {
         return NULL;
     }
+    memset(mapItem, 0, sizeof(MapItem));
     int pathPosition;
     sscanf(visitor->buffer,
            "%" PRIxPTR"-%" PRIxPTR" %4s %" PRIxPTR" %" PRIxPTR":%" PRIxPTR" %" PRIuMAX" %n",
