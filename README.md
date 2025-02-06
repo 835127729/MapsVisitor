@@ -34,7 +34,7 @@ android{
 
 dependencies {    
   	//2、依赖最新版本
-    implementation("com.github.835127729:MapsVisitor:1.0.1")
+    implementation("com.github.835127729:MapsVisitor:1.0.2")
 }
 ```
 
